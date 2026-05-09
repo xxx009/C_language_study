@@ -20,11 +20,6 @@ bool subway_export_json(const struct subway_graph *graph, const char *path)
                 graph->stations[i].name, graph->stations[i].active ? 1 : 0,
                 i + 1 == graph->station_count ? "" : ",");
     }
-    fprintf(fp, "  ],\n  \"lines\": [\n");
-    for (int i = 0; i < graph->line_count; i++) {
-        fprintf(fp, "    {\"id\":%d,\"name\":\"%s\",\"active\":%d}%s\n", graph->lines[i].id, graph->lines[i].name,
-                graph->lines[i].active ? 1 : 0, i + 1 == graph->line_count ? "" : ",");
-    }
     fprintf(fp, "  ]\n}\n");
     fclose(fp);
     return true;
@@ -44,14 +39,20 @@ bool subway_import_json(struct subway_graph *graph, const char *path)
     subway_init(graph);
     char line[256];
     int in_stations = 0;
+    int stations_block_count = 0;
 
     while (fgets(line, sizeof(line), fp) != NULL) {
         if (strstr(line, "\"stations\"") != NULL) {
             in_stations = 1;
+            stations_block_count += 1;
+            if (stations_block_count > 1) {
+                break; /* 兼容两个 JSON 对象拼接，只读取第一个对象 */
+            }
             continue;
         }
         if (in_stations && strchr(line, ']') != NULL) {
-            break;
+            in_stations = 0;
+            continue;
         }
         if (!in_stations) {
             continue;
@@ -61,7 +62,14 @@ bool subway_import_json(struct subway_graph *graph, const char *path)
         int active = 0;
         char name[MAX_NAME_LEN] = {0};
         if (sscanf(line, " {\"id\":%d,\"name\":\"%63[^\"]\",\"active\":%d}", &id, name, &active) == 3) {
-            int sid = subway_add_station(graph, name);
+            int exists = -1;
+            for (int i = 0; i < graph->station_count; i++) {
+                if (strcmp(graph->stations[i].name, name) == 0) {
+                    exists = i;
+                    break;
+                }
+            }
+            int sid = exists >= 0 ? exists : subway_add_station(graph, name);
             if (sid >= 0 && !active) {
                 subway_remove_station(graph, sid);
             }
