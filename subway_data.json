@@ -1,0 +1,153 @@
+{
+  "stations": [
+    {
+      "id": 0,
+      "name": "天河公园",
+      "active": 1
+    },
+    {
+      "id": 1,
+      "name": "体育西路",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "name": "珠江新城",
+      "active": 1
+    },
+    {
+      "id": 3,
+      "name": "广州塔",
+      "active": 1
+    },
+    {
+      "id": 4,
+      "name": "东山口",
+      "active": 1
+    },
+    {
+      "id": 5,
+      "name": "杨箕",
+      "active": 1
+    },
+    {
+      "id": 6,
+      "name": "公园前",
+      "active": 1
+    },
+    {
+      "id": 7,
+      "name": "西门口",
+      "active": 1
+    },
+    {
+      "id": 8,
+      "name": "火车站",
+      "active": 1
+    },
+    {
+      "id": 9,
+      "name": "客村",
+      "active": 1
+    }
+  ],
+  "lines": [
+    {
+      "name": "3号线"
+    },
+    {
+      "name": "5号线"
+    },
+    {
+      "name": "1号线"
+    }
+  ],
+  "line_stations": [
+    {
+      "line": "3号线",
+      "stations": "0|1|2|3|9"
+    },
+    {
+      "line": "5号线",
+      "stations": "4|5|2|6"
+    },
+    {
+      "line": "1号线",
+      "stations": "7|6|1|8"
+    }
+  ],
+  "segments": [
+    {
+      "a": 0,
+      "b": 1,
+      "line": "3号线",
+      "minutes": 4
+    },
+    {
+      "a": 1,
+      "b": 2,
+      "line": "3号线",
+      "minutes": 5
+    },
+    {
+      "a": 2,
+      "b": 3,
+      "line": "3号线",
+      "minutes": 6
+    },
+    {
+      "a": 3,
+      "b": 9,
+      "line": "3号线",
+      "minutes": 3
+    },
+    {
+      "a": 4,
+      "b": 5,
+      "line": "5号线",
+      "minutes": 3
+    },
+    {
+      "a": 5,
+      "b": 2,
+      "line": "5号线",
+      "minutes": 4
+    },
+    {
+      "a": 2,
+      "b": 6,
+      "line": "5号线",
+      "minutes": 5
+    },
+    {
+      "a": 7,
+      "b": 6,
+      "line": "1号线",
+      "minutes": 3
+    },
+    {
+      "a": 6,
+      "b": 1,
+      "line": "1号线",
+      "minutes": 4
+    },
+    {
+      "a": 1,
+      "b": 8,
+      "line": "1号线",
+      "minutes": 5
+    }
+  ],
+  "transfers": [
+    {
+      "a": 1,
+      "b": 5,
+      "minutes": 5
+    },
+    {
+      "a": 2,
+      "b": 9,
+      "minutes": 4
+    }
+  ]
+}

@@ -26,3 +26,12 @@ gcc -Iinclude src/subway/main.c src/subway/subway_core.c src/subway/subway_opera
 ./subway_planner
 # 按提示输入：起点 终点 乘客数（如：0 5 20）
 ```
+
+
+也可以使用 Makefile：
+
+```bash
+make
+make run
+make clean
+```
